@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andi Farhan Fauzi | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- Variables & Reset (Default: Dark Blue Theme) --- */
+        :root {
+            --primary-color: #0A192F; /* Navy Blue */
+            --secondary-color: #112240;
+            --accent-blue: #3B82F6; /* Terang untuk latar gelap */
+            --bg-color: #0A192F;
+            --bg-light: #112240;
+            --text-color: #CCD6F6;
+            --text-light: #8892B0;
+            --white: #112240;
+            --transition: all 0.3s ease;
+        }
+
+        /* Light Mode Variables */
+        .light-mode {
+            --bg-color: #F8F9FA;
+            --bg-light: #E9ECEF;
+            --text-color: #333333;
+            --text-light: #666666;
+            --white: #FFFFFF;
+            --accent-blue: #2C74B3;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: var(--transition);
+            line-height: 1.6;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        .mt-5 { margin-top: 3rem; }
+        .text-left { text-align: left !important; }
+        .text-accent { color: var(--accent-blue); }
+
+        /* --- Navbar --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: transparent;
+            padding: 20px 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        nav.scrolled {
+            background: var(--bg-light);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            padding: 15px 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo { font-size: 1.8rem; font-weight: 700; color: var(--accent-blue); }
+        .logo span { color: var(--text-color); }
+
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { font-weight: 500; transition: var(--transition); }
+        .nav-links a:hover { color: var(--accent-blue); }
+
+        .theme-btn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .theme-btn:hover { color: var(--accent-blue); }
+
+        .hamburger { display: none; font-size: 1.5rem; cursor: pointer; color: var(--text-color); }
+
+        /* --- Sections & Container --- */
+        .section { padding: 100px 20px; }
+        .bg-light { background-color: var(--bg-light); }
+        .container { max-width: 1100px; margin: auto; }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+            color: var(--text-color); /* Default terang di latar gelap */
+            position: relative;
+        }
+        .light-mode .section-title { color: var(--primary-color); }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, var(--bg-color) 0%, var(--bg-light) 100%);
+        }
+        .hero h3 { font-weight: 400; color: var(--text-light); margin-bottom: 10px; }
+        
+        .hero h1 { font-size: 3.5rem; font-weight: 700; color: var(--text-color); margin-bottom: 10px; }
+        .light-mode .hero h1 { color: var(--primary-color); }
+        
+        .tagline { font-size: 1.2rem; font-weight: 300; color: var(--text-light); margin-bottom: 30px; }
+
+        .btn {
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-block;
+            margin: 0 10px;
+        }
+        .btn-primary { background: var(--accent-blue); color: #fff; }
+        .btn-primary:hover { background: #1f5787; transform: translateY(-3px); }
+        .btn-secondary { border: 2px solid var(--accent-blue); color: var(--accent-blue); }
+        .btn-secondary:hover { background: var(--accent-blue); color: #fff; transform: translateY(-3px); }
+
+        /* --- About & Skills --- */
+        .about-content { text-align: center; font-size: 1.1rem; color: var(--text-light); max-width: 800px; margin: auto; }
+        .skills-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
+        .skill-badge {
+            background: var(--bg-light);
+            border: 1px solid var(--accent-blue);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+        .skill-badge:hover { background: var(--accent-blue); color: #fff; }
+
+        /* --- Resume (Grid Layout) --- */
+        .resume-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .resume-column h3 { margin-bottom: 20px; color: var(--accent-blue); }
+        .timeline-item {
+            border-left: 2px solid var(--accent-blue);
+            padding-left: 20px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            left: -7px;
+            top: 5px;
+        }
+        .timeline-item h4 { font-size: 1.1rem; color: var(--text-color); }
+        .timeline-item h5 { font-size: 0.9rem; font-weight: 400; color: var(--text-light); margin-bottom: 5px; }
+        .timeline-item p { font-size: 0.9rem; color: var(--text-light); }
+
+        /* --- Lists (Awards, Pubs, Certs) --- */
+        .list-items li { 
+            margin-bottom: 15px; 
+            padding: 15px; 
+            background: var(--bg-light); 
+            border-radius: 8px; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+        }
+        .light-mode .list-items li { background: var(--bg-color); }
+
+        /* --- Projects --- */
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; justify-items: center; }
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            padding: 30px;
+            transition: var(--transition);
+            border-top: 4px solid var(--accent-blue);
+            width: 100%;
+            max-width: 400px;
+        }
+        .card:hover { transform: translateY(-10px); }
+        .card h3 { margin-bottom: 10px; color: var(--text-color); }
+        .card p { color: var(--text-light); margin-bottom: 20px; font-size: 0.95rem; }
+        .card-link { color: var(--accent-blue); font-weight: 600; }
+        .card-link:hover { text-decoration: underline; }
+
+        /* --- Contact Section --- */
+        .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        
+        .contact-info h3 { color: var(--text-color); }
+        .light-mode .contact-info h3 { color: var(--primary-color); }
+        
+        .contact-info p { color: var(--text-light); margin: 10px 0; }
+        .email-link { display: inline-block; margin-top: 15px; font-size: 1.1rem; color: var(--accent-blue); font-weight: 600; }
+        .contact-form form { display: flex; flex-direction: column; gap: 15px; }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            border: none;
+            background: var(--bg-light);
+            color: var(--text-color);
+            font-family: 'Poppins', sans-serif;
+            outline: none;
+        }
+        .light-mode .contact-form input, .light-mode .contact-form textarea { border: 1px solid #ccc; }
+
+        /* --- Footer --- */
+        footer { text-align: center; padding: 20px; background: #071121; color: #fff; font-size: 0.9rem; }
+        .light-mode footer { background: var(--primary-color); }
+
+        /* --- Animations & Utilities --- */
+        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .fade-in.appear { opacity: 1; transform: translateY(0); }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            .nav-links { display: none; flex-direction: column; width: 100%; position: absolute; top: 100%; left: 0; background: var(--bg-light); padding: 20px; }
+            .nav-links.active { display: flex; }
+            .hamburger { display: block; }
+            .hero h1 { font-size: 2.5rem; }
+            .contact-wrapper { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <div class="nav-container">
+            <h1 class="logo">AF<span>.</span></h1>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#resume">Resume</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button id="theme-toggle" class="theme-btn"><i class="fa-solid fa-sun"></i></button>
+            <div class="hamburger">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content fade-in">
+            <h3>Halo, saya</h3>
+            <h1>Andi Farhan Fauzi</h1>
+            <h2 class="tagline">Sociology Student | Research Enthusiast | Academic Writer</h2>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-secondary">Contact Me</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <div class="container fade-in">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <p>Saya adalah Mahasiswa Sosiologi di Universitas Hasanuddin dengan IPK <strong>3.98</strong>. Saya memiliki minat yang mendalam dalam riset sosial, kesehatan mental, dan pengolahan data. Berdedikasi untuk terus belajar dan mengaplikasikan ilmu sosiologi dalam memecahkan masalah di masyarakat.</p>
+            </div>
+            
+            <h2 class="section-title mt-5">Skills</h2>
+            <div class="skills-container">
+                <span class="skill-badge"><i class="fa-solid fa-users-viewfinder"></i> Field Research & Interviews</span>
+                <span class="skill-badge"><i class="fa-solid fa-pen-nib"></i> Academic Writing</span>
+                <span class="skill-badge"><i class="fa-solid fa-chart-pie"></i> Text Mining & Sentiment Analysis</span>
+                <span class="skill-badge"><i class="fa-solid fa-code"></i> Data Visualization (HTML/CSS/JS)</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="resume" class="section bg-light">
+        <div class="container fade-in">
+            <h2 class="section-title">Education & Experience</h2>
+            
+            <div class="resume-grid">
+                <div class="resume-column">
+                    <h3><i class="fa-solid fa-graduation-cap"></i> Education</h3>
+                    <div class="timeline-item">
+                        <h4>S1 Sosiologi</h4>
+                        <h5>Universitas Hasanuddin (2022–2026)</h5>
+                        <p>GPA: 3.98 / 4.00</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Ilmu Pengetahuan Sosial (IPS)</h4>
+                        <h5>SMAN 1 Bone (2019–2022)</h5>
+                    </div>
+                </div>
+
+                <div class="resume-column">
+                    <h3><i class="fa-solid fa-briefcase"></i> Experience</h3>
+                    <div class="timeline-item">
+                        <h4>Research Assistant (2025)</h4>
+                        <p>Proyek: Studi prevalensi depresi di Makassar</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Research Assistant (2024)</h4>
+                        <p>Proyek: Borneo Shark & Rays Research</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Contributing Writer</h4>
+                        <p>Media: Kumparan & Harian Fajar</p>
+                    </div>
+                </div>
+
+                <div class="resume-column">
+                    <h3><i class="fa-solid fa-sitemap"></i> Organization</h3>
+                    <div class="timeline-item">
+                        <h4>Koordinator Research & People Dev. (2025)</h4>
+                        <p>Mental Health Research Community</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Koordinator Biro Kompetisi & Prestasi (2024)</h4>
+                        <p>PRM FISIP Unhas</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <div class="container fade-in">
+            <h2 class="section-title">Projects</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-content">
+                        <h3>Website Profil Desa</h3>
+                        <p>Website statis untuk profil desa berbasis HTML/CSS.</p>
+                        <a href="https://desatanete.github.io/" target="_blank" class="card-link">Kunjungi Website <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="achievements" class="section bg-light">
+        <div class="container fade-in">
+            <div class="resume-grid">
+                <div class="resume-column">
+                    <h2 class="section-title text-left">Awards</h2>
+                    <ul class="list-items">
+                        <li><i class="fa-solid fa-medal text-accent"></i> Medali Perunggu PIMNAS ke-36 (2023)</li>
+                        <li><i class="fa-solid fa-award text-accent"></i> Hibah PKM Kemendikbud (2023 & 2024)</li>
+                        <li><i class="fa-solid fa-trophy text-accent"></i> Juara 1 Lomba Esai Nasional (2023)</li>
+                    </ul>
+                </div>
+
+                <div class="resume-column">
+                    <h2 class="section-title text-left">Publications</h2>
+                    <ul class="list-items">
+                        <li><i class="fa-solid fa-book text-accent"></i> Publikasi Scopus Q4 tentang prevalensi depresi di Makassar</li>
+                        <li><i class="fa-solid fa-file-lines text-accent"></i> Paper WCGSS tentang dampak AI dalam pendidikan</li>
+                    </ul>
+                </div>
+
+                <div class="resume-column">
+                    <h2 class="section-title text-left">Certifications</h2>
+                    <ul class="list-items">
+                        <li><i class="fa-solid fa-certificate text-accent"></i> Prompt Engineering – Dicoding</li>
+                        <li><i class="fa-solid fa-certificate text-accent"></i> IBM Data Classification</li>
+                        <li><i class="fa-solid fa-certificate text-accent"></i> Design Thinking Academy</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <div class="container fade-in">
+            <h2 class="section-title">Contact Me</h2>
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <h3>Let's Connect!</h3>
+                    <p>Lokasi: Gowa, Sulawesi Selatan, Indonesia</p>
+                    <a href="mailto:andifarhanfauzi31@gmail.com" class="email-link">
+                        <i class="fa-solid fa-envelope"></i> andifarhanfauzi31@gmail.com
+                    </a>
+                </div>
+                <div class="contact-form">
+                    <form id="simpleForm">
+                        <input type="text" placeholder="Nama Anda" required>
+                        <input type="email" placeholder="Email Anda" required>
+                        <textarea rows="5" placeholder="Pesan Anda" required></textarea>
+                        <button type="submit" class="btn btn-primary">Kirim Pesan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Andi Farhan Fauzi. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // --- Sticky Navbar ---
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // --- Mode Toggle (Default Gelap ke Terang) ---
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        const icon = themeToggle.querySelector('i');
+
+        // Cek preferensi user sebelumnya (sekarang kita cek jika user memilih light)
+        if (localStorage.getItem('theme') === 'light') {
+            body.classList.add('light-mode');
+            icon.classList.replace('fa-sun', 'fa-moon');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            if (body.classList.contains('light-mode')) {
+                localStorage.setItem('theme', 'light');
+                icon.classList.replace('fa-sun', 'fa-moon');
+            } else {
+                localStorage.setItem('theme', 'dark');
+                icon.classList.replace('fa-moon', 'fa-sun');
+            }
+        });
+
+        // --- Fade-in Animation on Scroll (Intersection Observer) ---
+        const faders = document.querySelectorAll('.fade-in');
+
+        const appearOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('appear');
+                observer.unobserve(entry.target);
+            });
+        }, appearOptions);
+
+        faders.forEach(fader => {
+            appearOnScroll.observe(fader);
+        });
+
+        // --- Prevent Default on Simple Form ---
+        const simpleForm = document.getElementById('simpleForm');
+        simpleForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert("Terima kasih! Pesan Anda telah disimulasikan terkirim.");
+            simpleForm.reset();
+        });
+
+        // --- Hamburger Menu Toggle (Mobile) ---
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
